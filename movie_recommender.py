@@ -63,8 +63,7 @@ def load_data(spark, data_path):
                 regexp_extract("value", r"::(\d+\.\d+)::", 1).cast("float").alias("rating"),
                 regexp_extract("value", r"::(\d+)$", 1).cast("long").alias("timestamp")
             ) \
-            .filter(col("rating") > 0) #\
-            #.sample(fraction=0.95, seed=42)  # Уменьшаем до 20% данных
+            .filter(col("rating") > 0) 
         ratings = ratings.repartition(20).persist()
             
         # Удаление пользователей с менее чем 5 оценками
@@ -82,9 +81,9 @@ def train_model(ratings):
     #Обучение модели ALS
     try:
         als = ALS(
-            maxIter=10,
+            maxIter=20,
             regParam=0.3,
-            rank=20,  # Увеличиваем rank для большей точности
+            rank=50,  # Увеличиваем rank для большей точности
             userCol="userID",
             itemCol="movieID",
             ratingCol="rating",
@@ -300,7 +299,7 @@ def main():
         
         try:
             # Разделение данных на обучающую и тестовую выборки
-            train, test = ratings.randomSplit([0.8, 0.2], seed=13)
+            train, test = ratings.randomSplit([0.8, 0.2], seed=42)
             
             # Обучение модели
             model = train_model(train)
@@ -309,11 +308,11 @@ def main():
             rmse = evaluate_model(model, test)
             
             # Визуализация распределения оценок
-            ratings_pd = ratings.sample(fraction=0.5, seed=42).toPandas()
+            ratings_pd = ratings.sample(fraction=0.9, seed=42).toPandas()
             plot_ratings_distribution(ratings_pd)
             
             # Пример получения рекомендаций для пользователя
-            user_id = 558
+            user_id = 1
             
             # Анализ и визуализация жанров пользователя
             genre_counts = analyze_user_genres(ratings, movies, user_id)
