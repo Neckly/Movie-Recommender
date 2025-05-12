@@ -83,7 +83,7 @@ def train_model(ratings):
         als = ALS(
             maxIter=20,
             regParam=0.3,
-            rank=50,  # Увеличиваем rank для большей точности
+            rank=35,  # Увеличиваем rank для большей точности
             userCol="userID",
             itemCol="movieID",
             ratingCol="rating",
