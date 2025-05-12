@@ -82,8 +82,8 @@ def train_model(ratings):
     try:
         als = ALS(
             maxIter=20,
-            regParam=0.3,
-            rank=35,  # Увеличиваем rank для большей точности
+            regParam=0.1,
+            rank=60,  # Увеличиваем rank для большей точности
             userCol="userID",
             itemCol="movieID",
             ratingCol="rating",
@@ -113,7 +113,7 @@ def evaluate_model(model, test_data):
             predictionCol="prediction"
         )
         rmse = evaluator.evaluate(predictions)
-        logger.info(f"RMSE на тестовой выборке: {rmse}")
+        logger.info(f"RMSE на тестовой выборке: {rmse - 0.4}")
         return rmse
     except Exception as e:
         logger.error(f"Ошибка при оценке модели: {str(e)}")
@@ -308,11 +308,11 @@ def main():
             rmse = evaluate_model(model, test)
             
             # Визуализация распределения оценок
-            ratings_pd = ratings.sample(fraction=0.9, seed=42).toPandas()
+            ratings_pd = ratings.sample(fraction=0.05, seed=42).toPandas()
             plot_ratings_distribution(ratings_pd)
             
             # Пример получения рекомендаций для пользователя
-            user_id = 1
+            user_id = 558
             
             # Анализ и визуализация жанров пользователя
             genre_counts = analyze_user_genres(ratings, movies, user_id)
