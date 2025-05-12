@@ -1,0 +1,44 @@
+# Папки с данными
+ml-100k/
+ml-1m/
+ml-10M100K/
+ml-20m/
+ml-25m/
+
+# Папка с графиками
+Graphs/
+
+# Временные файлы Spark
+spark_temp/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Логи
+*.log 
