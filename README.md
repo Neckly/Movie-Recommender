@@ -28,7 +28,7 @@ pip install -r requirements.txt
 ## Использование
 
 Для запуска рекомендательной системы:
-1. Скачайте и поместите необходимый датасет с https://grouplens.org/datasets/movielens/
+1. Скачайте и поместите в папку с проектом необходимый датасет с https://grouplens.org/datasets/movielens/
 
  2. Выполните:
 ```bash
