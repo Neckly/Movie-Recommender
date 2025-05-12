@@ -23,17 +23,16 @@ pip install -r requirements.txt
 ## Структура проекта
 
 - `movie_recommender.py` - основной файл с кодом рекомендательной системы
-- `ml-100k/` - директория с датасетом MovieLens
 - `requirements.txt` - файл с зависимостями проекта
 
 ## Использование
 
 Для запуска рекомендательной системы:
+<<<<<<< HEAD
 
 1. Скачайте и поместите в папку с проектом необходимый датасет с https://grouplens.org/datasets/movielens/
 
-2. Выполните:
-
+ 2. Выполните:
 ```bash
 python movie_recommender.py
 ```
